@@ -1,0 +1,30 @@
+dataset: /media/sda5/final_nemo_2/final_nemo/external_apps/ai_unit/configs/vad_test.json
+frame_out_dir: vad_frame
+gen_seg_table: true
+name: vad_inference_postprocessing
+num_workers: 4
+out_manifest_filepath: 0359051.json
+prepare_manifest:
+  auto_split: true
+  split_duration: 400
+prepared_manifest_vad_input: null
+sample_rate: 16000
+smoothing_out_dir: null
+table_out_dir: null
+vad:
+  model_path: /media/sda5/final_nemo_2/final_nemo/external_apps/ai_unit/models/epoch=200-step=5025.ckpt
+  parameters:
+    normalize_audio: false
+    overlap: 0.875
+    postprocessing:
+      filter_speech_first: true
+      min_duration_off: 0.03
+      min_duration_on: 0.03
+      offset: 0.4
+      onset: 0.6
+      pad_offset: 0.1
+      pad_onset: 0.1
+    shift_length_in_sec: 0.08
+    smoothing: false
+    window_length_in_sec: 0.63
+write_to_manifest: true

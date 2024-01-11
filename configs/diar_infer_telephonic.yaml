@@ -1,0 +1,91 @@
+batch_size: 64
+device: cuda:1
+diarizer:
+  asr:
+    ctc_decoder_parameters:
+      alpha: 0.5
+      beam_width: 32
+      beta: 2.5
+      pretrained_language_model: null
+    model_path: stt_en_conformer_ctc_large
+    parameters:
+      asr_based_vad: false
+      asr_based_vad_threshold: 1.0
+      asr_batch_size: null
+      break_lines: false
+      colored_text: false
+      decoder_delay_in_sec: null
+      fix_word_ts_with_VAD: false
+      print_time: true
+      word_ts_anchor_offset: null
+      word_ts_anchor_pos: start
+    realigning_lm_parameters:
+      arpa_language_model: null
+      logprob_diff_threshold: 1.2
+      max_number_of_words: 10
+      min_number_of_words: 3
+  clustering:
+    parameters:
+      enhanced_count_thres: 80
+      maj_vote_spk_count: false
+      max_num_speakers: 8
+      max_rp_threshold: 0.25
+      oracle_num_speakers: true
+      sparse_search_volume: 30
+  collar: 0.25
+  ignore_overlap: true
+  manifest_filepath: /media/sda5/final_nemo_2/final_nemo/external_apps/ai_unit/configs/input_manifest.json
+  msdd_model:
+    model_path: diar_msdd_telephonic
+    parameters:
+      diar_window_length: 50
+      infer_batch_size: 25
+      overlap_infer_spk_limit: 5
+      seq_eval_mode: false
+      sigmoid_threshold:
+      - 0.7
+      split_infer: true
+      use_speaker_model_from_ckpt: true
+  oracle_vad: false
+  out_dir: /media/sda5/final_nemo_2/final_nemo/external_apps/ai_unit/speaker_diar_output
+  speaker_embeddings:
+    model_path: /media/sda5/final_nemo_2/final_nemo/external_apps/ai_unit/models/titanet-l.nemo
+    parameters:
+      multiscale_weights:
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      save_embeddings: true
+      shift_length_in_sec:
+      - 0.75
+      - 0.625
+      - 0.5
+      - 0.375
+      - 0.25
+      window_length_in_sec:
+      - 1.5
+      - 1.25
+      - 1.0
+      - 0.75
+      - 0.5
+  vad:
+    external_vad_manifest: /media/sda5/final_nemo_2/final_nemo/external_apps/ai_unit/0359051.json
+    model_path: null
+    parameters:
+      filter_speech_first: true
+      min_duration_off: 0.2
+      min_duration_on: 0
+      offset: 0.4
+      onset: 0.6
+      overlap: 0.5
+      pad_offset: 0
+      pad_onset: 0.1
+      shift_length_in_sec: 0.01
+      smoothing: median
+      window_length_in_sec: 0.15
+name: ClusterDiarizer
+num_workers: 1
+sample_rate: 16000
+verbose: true
